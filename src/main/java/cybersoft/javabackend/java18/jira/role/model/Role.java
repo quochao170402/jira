@@ -16,13 +16,21 @@ import javax.persistence.Table;
 @NoArgsConstructor
 @Entity
 @Table(name = RoleEntity.Role.TABLE_NAME)
-public class RoleModel extends BaseEntity {
-    @Column(name = RoleEntity.Role.NAME)
+public class Role extends BaseEntity {
+    @Column(name = RoleEntity.Role.NAME, unique = true)
     private String name;
 
-    @Column(name = RoleEntity.Role.CODE)
+    @Column(name = RoleEntity.Role.CODE, unique = true)
     private String code;
 
     @Column(name = RoleEntity.Role.DESCRIPTION)
     private String description;
+
+    @Override
+    public boolean equals(Object obj) {
+        Role other = (Role) obj;
+        return super.equals(obj)
+                && this.name.equals(other.name)
+                && this.code.equals(other.code);
+    }
 }

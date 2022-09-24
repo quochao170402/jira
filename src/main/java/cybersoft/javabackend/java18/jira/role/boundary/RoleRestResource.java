@@ -1,6 +1,8 @@
 package cybersoft.javabackend.java18.jira.role.boundary;
 
-import cybersoft.javabackend.java18.jira.role.model.RoleModel;
+import cybersoft.javabackend.java18.jira.common.utils.ResponseUtils;
+import cybersoft.javabackend.java18.jira.role.dto.RoleDTO;
+import cybersoft.javabackend.java18.jira.role.model.Role;
 import cybersoft.javabackend.java18.jira.role.service.RoleService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -23,27 +25,22 @@ public class RoleRestResource {
     }
 
     @GetMapping
-    public ResponseEntity<Object> findAll() {
-        return new ResponseEntity<>(roleService.findAll(), HttpStatus.OK);
-    }
-
-    @GetMapping("/{code}")
-    public ResponseEntity<Object> findByCode(@PathVariable String code) {
-        return new ResponseEntity<>(roleService.findByCode(code), HttpStatus.OK);
+    public Object findAll() {
+        return ResponseUtils.get(roleService.findAllDto(RoleDTO.class), HttpStatus.OK);
     }
 
     @PostMapping
-    public ResponseEntity<Object> saveRole(@RequestBody RoleModel roleModel) {
-        return new ResponseEntity<>(roleService.save(roleModel), HttpStatus.CREATED);
+    public Object saveRole(@RequestBody Role role) {
+        return ResponseUtils.get(roleService.save(role), HttpStatus.CREATED);
     }
 
     @PutMapping("/{code}")
-    public ResponseEntity<Object> updateRole(@RequestBody RoleModel roleModel, @PathVariable String code) {
-        return new ResponseEntity<>(roleService.update(roleModel, code), HttpStatus.CREATED);
+    public Object updateRole(@RequestBody Role role, @PathVariable String code) {
+        return ResponseUtils.get(roleService.update(role, code), HttpStatus.CREATED);
     }
 
     @DeleteMapping("/{code}")
-    public ResponseEntity<Object> deleteRole(@PathVariable String code) {
+    public Object deleteRole(@PathVariable String code) {
         roleService.delete(code);
         return new ResponseEntity<>("Deleted", HttpStatus.OK);
     }

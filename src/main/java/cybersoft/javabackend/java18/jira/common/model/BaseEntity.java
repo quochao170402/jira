@@ -70,6 +70,11 @@ public class BaseEntity implements Serializable {
     @DateTimeFormat(pattern = DateTimeUtils.DATETIME_FORMAT_dd_MM_yyyy_HH_mm_ss)
     protected LocalDateTime lastModifiedAt;
 
+    @Override
+    public boolean equals(Object obj) {
+        return this.id.equals(((BaseEntity) obj).id);
+    }
+
     // inner class
     @UtilityClass
     static class Columns {
