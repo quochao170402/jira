@@ -1,11 +1,13 @@
 package cybersoft.javabackend.java18.jira.role.service;
 
 import cybersoft.javabackend.java18.jira.common.utils.JiraMapper;
+import cybersoft.javabackend.java18.jira.role.dto.RoleDTO;
 import cybersoft.javabackend.java18.jira.role.model.Role;
 import cybersoft.javabackend.java18.jira.role.repository.RoleRepository;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.UUID;
 
 @Service
@@ -19,7 +21,17 @@ public class RoleServiceImpl implements RoleService {
     }
 
     @Override
-    public Role update(Role role, String code) {
+    public RoleDTO save(RoleDTO dto) {
+        return RoleService.super.save(dto, Role.class, RoleDTO.class);
+    }
+
+    @Override
+    public List<RoleDTO> findAll() {
+        return RoleService.super.findAll(RoleDTO.class);
+    }
+
+    @Override
+    public RoleDTO update(RoleDTO role, String code) {
         /*
             1. Get entity from database by repository -> object will place in orm context
             2. Change object -> when finish transaction, data will update to database
@@ -31,7 +43,7 @@ public class RoleServiceImpl implements RoleService {
         currentRole.setName(role.getName());
         currentRole.setDescription(role.getDescription());
 
-        return roleRepository.save(currentRole);
+        return getMapper().map(RoleService.super.update(currentRole, currentRole.getId()), RoleDTO.class);
     }
 
     @Override
