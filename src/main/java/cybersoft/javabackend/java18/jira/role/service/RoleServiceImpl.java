@@ -1,6 +1,7 @@
 package cybersoft.javabackend.java18.jira.role.service;
 
 import cybersoft.javabackend.java18.jira.common.utils.JiraMapper;
+import cybersoft.javabackend.java18.jira.role.dto.RoleDTO;
 import cybersoft.javabackend.java18.jira.role.model.Role;
 import cybersoft.javabackend.java18.jira.role.repository.RoleRepository;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -35,10 +36,25 @@ public class RoleServiceImpl implements RoleService {
     }
 
     @Override
+    public RoleDTO update(RoleDTO roleDTO, String code) {
+        Role currentRole = roleRepository.findByCode(code);
+        if (currentRole == null) return null;
+        currentRole.setName(roleDTO.getName());
+        currentRole.setDescription(roleDTO.getDescription());
+        return mapper.map(roleRepository.save(currentRole), RoleDTO.class);
+    }
+
+    @Override
     public void delete(String code) {
         Role currentRole = roleRepository.findByCode(code);
         if (currentRole == null) return;
         roleRepository.deleteByCode(code);
+    }
+
+    @Override
+    public RoleDTO save(RoleDTO dto) {
+        Role entity = mapper.map(dto, Role.class);
+        return mapper.map(RoleService.super.save(entity), RoleDTO.class);
     }
 
     @Override
