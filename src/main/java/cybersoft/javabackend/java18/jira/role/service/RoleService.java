@@ -8,11 +8,14 @@ import java.util.List;
 import java.util.UUID;
 
 public interface RoleService extends GenericService<Role, RoleDTO, UUID> {
+    RoleDTO save(RoleDTO dto);
+    Role update(Role role, String code);
+
     RoleDTO save(RoleDTO roleDTO);
 
     List<RoleDTO> findAll();
 
     RoleDTO update(RoleDTO roleDTO, String code);
     void delete(String code);
-
+    RoleDTO update(RoleDTO roleDTO, String code);
 }

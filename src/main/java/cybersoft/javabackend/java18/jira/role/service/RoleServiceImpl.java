@@ -47,10 +47,25 @@ public class RoleServiceImpl implements RoleService {
     }
 
     @Override
+    public RoleDTO update(RoleDTO roleDTO, String code) {
+        Role currentRole = roleRepository.findByCode(code);
+        if (currentRole == null) return null;
+        currentRole.setName(roleDTO.getName());
+        currentRole.setDescription(roleDTO.getDescription());
+        return mapper.map(roleRepository.save(currentRole), RoleDTO.class);
+    }
+
+    @Override
     public void delete(String code) {
         Role currentRole = roleRepository.findByCode(code);
         if (currentRole == null) return;
         roleRepository.deleteByCode(code);
+    }
+
+    @Override
+    public RoleDTO save(RoleDTO dto) {
+        Role entity = mapper.map(dto, Role.class);
+        return mapper.map(RoleService.super.save(entity), RoleDTO.class);
     }
 
     @Override

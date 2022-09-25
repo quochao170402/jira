@@ -8,6 +8,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
+
+
 @RestController
 @RequestMapping("/api/roles")
 public class RoleRestResource {
@@ -29,6 +32,8 @@ public class RoleRestResource {
     }
 
     @PostMapping
+    public Object saveRole(@RequestBody @Valid RoleDTO roleDTO) {
+        return ResponseUtils.get(roleService.save(roleDTO), HttpStatus.CREATED);
     public Object saveRole(@RequestBody RoleDTO dto) {
         return ResponseUtils.get(
                 roleService.save(dto)
