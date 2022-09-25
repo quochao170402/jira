@@ -3,11 +3,13 @@ package cybersoft.javabackend.java18.jira.role.boundary;
 import cybersoft.javabackend.java18.jira.common.utils.ResponseUtils;
 import cybersoft.javabackend.java18.jira.role.dto.RoleDTO;
 import cybersoft.javabackend.java18.jira.role.service.RoleService;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+
 
 @RestController
 @RequestMapping("/api/roles")
@@ -20,12 +22,23 @@ public class RoleRestResource {
 
     @GetMapping
     public Object findAll() {
-        return ResponseUtils.get(roleService.findAllDto(RoleDTO.class), HttpStatus.OK);
+        return ResponseUtils.get(roleService.findAll(), HttpStatus.OK);
+    }
+
+    @GetMapping("/paging")
+    public Object findAllDtoPaging(@RequestParam int size,
+                                   @RequestParam int page) {
+        return ResponseUtils.get(roleService.findAll(Pageable.ofSize(size).withPage(page), RoleDTO.class), HttpStatus.OK);
     }
 
     @PostMapping
     public Object saveRole(@RequestBody @Valid RoleDTO roleDTO) {
         return ResponseUtils.get(roleService.save(roleDTO), HttpStatus.CREATED);
+    public Object saveRole(@RequestBody RoleDTO dto) {
+        return ResponseUtils.get(
+                roleService.save(dto)
+                , HttpStatus.CREATED
+        );
     }
 
     @PutMapping("/{code}")
