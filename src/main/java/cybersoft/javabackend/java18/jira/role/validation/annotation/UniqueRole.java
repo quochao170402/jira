@@ -13,7 +13,7 @@ import java.lang.annotation.Target;
 @Target(ElementType.TYPE)
 @Retention(RetentionPolicy.RUNTIME)
 public @interface UniqueRole {
-    String message() default "Role name or code is existed";
+    String message() default "{role.existed}";
 
     Class<?>[] groups() default {};
 

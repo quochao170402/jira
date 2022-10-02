@@ -9,46 +9,43 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.List;
+import java.util.UUID;
 
 
 @RestController
 @RequestMapping("/api/roles")
 public class RoleRestResource {
-    private final RoleService roleService;
+    private final RoleService service;
 
-    public RoleRestResource(RoleService roleService) {
-        this.roleService = roleService;
+    public RoleRestResource(RoleService roleService){
+        this.service = roleService;
     }
 
     @GetMapping
-    public Object findAll() {
-        return ResponseUtils.get(roleService.findAll(), HttpStatus.OK);
+    public Object findAll(){
+        return ResponseUtils.get(service.findAllDto(RoleDTO.class), HttpStatus.OK);
     }
 
     @GetMapping("/paging")
-    public Object findAllDtoPaging(@RequestParam int size,
-                                   @RequestParam int page) {
-        return ResponseUtils.get(roleService.findAll(Pageable.ofSize(size).withPage(page), RoleDTO.class), HttpStatus.OK);
-    }
-
-    @PostMapping
-    public Object saveRole(@RequestBody @Valid RoleDTO roleDTO) {
-        return ResponseUtils.get(roleService.save(roleDTO), HttpStatus.CREATED);
-    public Object saveRole(@RequestBody RoleDTO dto) {
+    public Object findAllDtoPaging(@RequestParam("size") int size,
+                                   @RequestParam("index") int index){
         return ResponseUtils.get(
-                roleService.save(dto)
-                , HttpStatus.CREATED
+                service.findAllDto(Pageable.ofSize(size).withPage(index), RoleDTO.class)
+                , HttpStatus.OK
         );
     }
 
-    @PutMapping("/{code}")
-    public Object updateRole(@RequestBody RoleDTO roleDTO, @PathVariable String code) {
-        return ResponseUtils.get(roleService.update(roleDTO, code), HttpStatus.CREATED);
+    @PostMapping
+    public Object save(@RequestBody @Valid RoleDTO roleDTO){
+        return ResponseUtils.get(service.save(roleDTO), HttpStatus.CREATED);
     }
 
-    @DeleteMapping("/{code}")
-    public Object deleteRole(@PathVariable String code) {
-        roleService.delete(code);
-        return new ResponseEntity<>("Deleted", HttpStatus.OK);
+
+    @PostMapping("{role-id}/add-operations")
+    public ResponseEntity<?> addOperations(@RequestBody List<UUID> ids,
+                                           @PathVariable("role-id") UUID roleId) {
+        return ResponseUtils.get(service.addOperations(ids, roleId),
+                HttpStatus.OK);
     }
 }
