@@ -11,4 +11,40 @@ public class RoleEntity {
         public static final String CODE = "J_CODE";
 
     }
+
+    @UtilityClass
+    public static class UserGroup{
+        public static final String TABLE_NAME = "J_GROUP";
+        public static final String NAME = "J_NAME";
+        public static final String DESCRIPTION = "J_DESCRIPTION";
+        public static final String CODE = "J_CODE";
+
+    }
+
+    @UtilityClass
+    public static class Operation {
+        public static final String TABLE_NAME = "J_OPERATION";
+        public static final String NAME = "J_NAME";
+        public static final String DESCRIPTION = "J_DESCRIPTION";
+        public static final String CODE = "J_CODE";
+        public static final String TYPE = "J_TYPE";
+
+    }
+
+    @UtilityClass
+    public static class Module{
+        public static final String TABLE_NAME = "J_MODULE";
+        public static final String NAME = "J_NAME";
+        public static final String DESCRIPTION = "J_DESCRIPTION";
+        public static final String CODE = "J_CODE";
+
+    }
+
+    public static class RoleMappedOperation {
+        public static final String OPERATION_MAPPED_ROLE = "operations";
+        public static final String JOIN_TABLE = "G_ROLE_OPERATION";
+        public static final String JOIN_TABLE_ROLE_ID = "G_ROLE_ID";
+        public static final String JOIN_TABLE_OPERATION_ID = "G_OPERATION_ID";
+
+    }
 }

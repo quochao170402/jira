@@ -34,10 +34,11 @@ import java.util.UUID;
 public class BaseEntity implements Serializable {
 
     /* Note for base entity
-    1. implements serializable
-    2. must have id (UUID) -> using @Type to convert uuid to uuid-char
-    3. must have version column to manage cache, compare, check data,...
-    4. auto generate createdBy, createdAt, lastModifiedAt, lastModifiedBy
+        1. implements serializable
+        2. must have id (UUID) -> using @Type to convert uuid to uuid-char
+        3. must have version column to manage cache, compare, check data,...
+        4. auto generate createdBy, createdAt, lastModifiedAt, lastModifiedBy
+        5. Override toString, hashCode, equals
      */
 
     @Id
