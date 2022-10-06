@@ -1,6 +1,7 @@
 package cybersoft.javabackend.java18.jira.role.service;
 
 import cybersoft.javabackend.java18.jira.common.utils.JiraMapper;
+import cybersoft.javabackend.java18.jira.role.dto.OperationDTO;
 import cybersoft.javabackend.java18.jira.role.dto.RoleDTO;
 import cybersoft.javabackend.java18.jira.role.dto.RoleWIthOperationDTO;
 import cybersoft.javabackend.java18.jira.role.model.Operation;
@@ -22,7 +23,7 @@ public class RoleServiceImpl implements RoleService {
 
     private final OperationService operationService;
 
-    public RoleServiceImpl(RoleRepository repository, JiraMapper mapper, OperationService operationService){
+    public RoleServiceImpl(RoleRepository repository, JiraMapper mapper, OperationService operationService) {
         this.repository = repository;
         this.mapper = mapper;
         this.operationService = operationService;
@@ -57,8 +58,9 @@ public class RoleServiceImpl implements RoleService {
         List<Operation> operations = operationService.findAllByIds(ids);
         operations.forEach(currentRole::addOperation);
         repository.save(currentRole);
-        currentRole.getOperations().forEach(System.out::println);
-        return mapper.map(currentRole, RoleWIthOperationDTO.class);
+        RoleWIthOperationDTO dto = mapper.map(currentRole, RoleWIthOperationDTO.class);
+        operations.forEach(operation -> dto.getOperationDTOs().add(mapper.map(operation, OperationDTO.class)));
+        return dto;
     }
 
     @Override

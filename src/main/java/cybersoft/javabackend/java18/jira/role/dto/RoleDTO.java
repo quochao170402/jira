@@ -20,7 +20,7 @@ public class RoleDTO {
     @NotBlank
     private String name;
 
-    @Length(min = 3, max = 10, message = "{role.code.size}")
+    @Length(min = 3, max = 20, message = "{role.code.size}")
     @NotBlank
     private String code;
 

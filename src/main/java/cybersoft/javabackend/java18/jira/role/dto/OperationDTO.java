@@ -17,7 +17,7 @@ public class OperationDTO {
     @Length(min = 5, max = 100, message = "{service.name.size}")
     @NotBlank
     private String name;
-    @Length(min = 3, max = 10, message = "{role.code.size}")
+    @Length(min = 3, max = 20, message = "{role.code.size}")
     @NotBlank
     private String code;
     @NotBlank( message = "Service description can not be blank")
