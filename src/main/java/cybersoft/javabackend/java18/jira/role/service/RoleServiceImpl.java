@@ -1,6 +1,7 @@
 package cybersoft.javabackend.java18.jira.role.service;
 
 import cybersoft.javabackend.java18.jira.common.utils.JiraMapper;
+import cybersoft.javabackend.java18.jira.role.dto.OperationDTO;
 import cybersoft.javabackend.java18.jira.role.dto.RoleDTO;
 import cybersoft.javabackend.java18.jira.role.dto.RoleWIthOperationDTO;
 import cybersoft.javabackend.java18.jira.role.model.Operation;
