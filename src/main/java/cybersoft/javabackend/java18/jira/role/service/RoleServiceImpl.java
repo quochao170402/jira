@@ -30,19 +30,6 @@ public class RoleServiceImpl implements RoleService {
     }
 
     @Override
-    public Role update(Role role, String code) {
-        Role curRole = repository.findByCode(code);
-        curRole.setName(role.getName());
-        curRole.setDescription(role.getDescription());
-        return repository.save(curRole);
-    }
-
-    @Override
-    public void deleteByCode(String code) {
-        repository.deleteByCode(code);
-    }
-
-    @Override
     public RoleDTO save(RoleDTO dto) {
         Role model = mapper.map(dto, Role.class);
         Role savedModel = repository.save(model);
@@ -58,9 +45,15 @@ public class RoleServiceImpl implements RoleService {
         List<Operation> operations = operationService.findAllByIds(ids);
         operations.forEach(currentRole::addOperation);
         repository.save(currentRole);
-        RoleWIthOperationDTO dto = mapper.map(currentRole, RoleWIthOperationDTO.class);
-        operations.forEach(operation -> dto.getOperationDTOs().add(mapper.map(operation, OperationDTO.class)));
-        return dto;
+        return mapper.map(currentRole, RoleWIthOperationDTO.class);
+    }
+
+    @Override
+    public List<RoleWIthOperationDTO> findAllIncludeOperation() {
+        return repository.findAllIncludeOperation()
+                .stream()
+                .map(role -> mapper.map(role, RoleWIthOperationDTO.class))
+                .toList();
     }
 
     @Override

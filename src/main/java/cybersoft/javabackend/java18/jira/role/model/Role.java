@@ -1,5 +1,6 @@
 package cybersoft.javabackend.java18.jira.role.model;
 
+import cybersoft.javabackend.java18.jira.common.constant.RoleEntityConstant;
 import cybersoft.javabackend.java18.jira.common.model.BaseEntity;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -19,18 +20,18 @@ import java.util.Set;
 @Setter
 @NoArgsConstructor
 @Entity
-@Table(name = RoleEntity.Role.TABLE_NAME)
+@Table(name = RoleEntityConstant.Role.TABLE_NAME)
 public class Role extends BaseEntity {
 
-    @Column(name = RoleEntity.Role.NAME, unique = true)
+    @Column(name = RoleEntityConstant.Role.NAME, unique = true)
     @Length(min = 5, max = 100, message = "Role name must have length between {min} and {max}")
     private String name;
 
-    @Column(name = RoleEntity.Role.CODE, unique = true)
+    @Column(name = RoleEntityConstant.Role.CODE, unique = true)
     @Length(min = 3, max = 10, message = "Role name must have length between {min} and {max}")
     private String code;
 
-    @Column(name = RoleEntity.Role.DESCRIPTION)
+    @Column(name = RoleEntityConstant.Role.DESCRIPTION)
     @NotBlank
     private String description;
 
@@ -43,16 +44,11 @@ public class Role extends BaseEntity {
             cascade = {CascadeType.PERSIST, CascadeType.MERGE}
     )
     @JoinTable(
-            name = RoleEntity.RoleMappedOperation.JOIN_TABLE,
-            joinColumns = @JoinColumn(name = RoleEntity.RoleMappedOperation.JOIN_TABLE_ROLE_ID),
-            inverseJoinColumns = @JoinColumn(name = RoleEntity.RoleMappedOperation.JOIN_TABLE_OPERATION_ID)
+            name = RoleEntityConstant.RoleMappedOperation.JOIN_TABLE,
+            joinColumns = @JoinColumn(name = RoleEntityConstant.RoleMappedOperation.JOIN_TABLE_ROLE_ID),
+            inverseJoinColumns = @JoinColumn(name = RoleEntityConstant.RoleMappedOperation.JOIN_TABLE_OPERATION_ID)
     )
     private Set<Operation> operations = new LinkedHashSet<>();
-
-    public void removeService(Operation operation) {
-        operations.remove(operation);
-        operation.getRoles().remove(this);
-    }
 
     public void addOperation(Operation operation){
         this.operations.add(operation);

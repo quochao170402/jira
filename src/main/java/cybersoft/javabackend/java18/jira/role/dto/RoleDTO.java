@@ -12,7 +12,6 @@ import java.util.UUID;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-// Can set annotation in class -> target is class
 @UniqueRole(message = "{role.existed}")
 public class RoleDTO {
     private UUID id;

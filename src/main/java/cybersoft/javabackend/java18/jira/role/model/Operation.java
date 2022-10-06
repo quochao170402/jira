@@ -1,5 +1,6 @@
 package cybersoft.javabackend.java18.jira.role.model;
 
+import cybersoft.javabackend.java18.jira.common.constant.RoleEntityConstant;
 import cybersoft.javabackend.java18.jira.common.model.BaseEntity;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -12,29 +13,28 @@ import java.util.LinkedHashSet;
 import java.util.Set;
 
 @Entity
-@Table(name = RoleEntity.Operation.TABLE_NAME)
 @Getter
 @Setter
 @SuperBuilder
-
 @AllArgsConstructor
 @NoArgsConstructor
+@Table(name = RoleEntityConstant.Operation.TABLE_NAME)
 public class Operation extends BaseEntity {
-    @Column(name = RoleEntity.Operation.NAME, unique = true)
+    @Column(name = RoleEntityConstant.Operation.NAME, unique = true)
     private String name;
 
-    @Column(name = RoleEntity.Operation.CODE, unique = true)
+    @Column(name = RoleEntityConstant.Operation.CODE, unique = true)
     private String code;
 
-    @Column(name = RoleEntity.Operation.DESCRIPTION)
+    @Column(name = RoleEntityConstant.Operation.DESCRIPTION)
     private String description;
 
-    @Column(name = RoleEntity.Operation.TYPE, nullable = false)
+    @Column(name = RoleEntityConstant.Operation.TYPE, nullable = false)
     @Enumerated(EnumType.STRING)
     private Type type;
 
     @ManyToMany(
-            mappedBy = RoleEntity.RoleMappedOperation.OPERATION_MAPPED_ROLE
+            mappedBy = RoleEntityConstant.RoleMappedOperation.OPERATION_MAPPED_ROLE
     )
     private Set<Role> roles = new LinkedHashSet<>();
 
@@ -44,3 +44,7 @@ public class Operation extends BaseEntity {
         REMOVE
     }
 }
+
+
+
+
