@@ -22,23 +22,10 @@ public class RoleServiceImpl implements RoleService {
 
     private final OperationService operationService;
 
-    public RoleServiceImpl(RoleRepository repository, JiraMapper mapper, OperationService operationService){
+    public RoleServiceImpl(RoleRepository repository, JiraMapper mapper, OperationService operationService) {
         this.repository = repository;
         this.mapper = mapper;
         this.operationService = operationService;
-    }
-
-    @Override
-    public Role update(Role role, String code) {
-        Role curRole = repository.findByCode(code);
-        curRole.setName(role.getName());
-        curRole.setDescription(role.getDescription());
-        return repository.save(curRole);
-    }
-
-    @Override
-    public void deleteByCode(String code) {
-        repository.deleteByCode(code);
     }
 
     @Override
@@ -57,8 +44,15 @@ public class RoleServiceImpl implements RoleService {
         List<Operation> operations = operationService.findAllByIds(ids);
         operations.forEach(currentRole::addOperation);
         repository.save(currentRole);
-        currentRole.getOperations().forEach(System.out::println);
         return mapper.map(currentRole, RoleWIthOperationDTO.class);
+    }
+
+    @Override
+    public List<RoleWIthOperationDTO> findAllIncludeOperation() {
+        return repository.findAllIncludeOperation()
+                .stream()
+                .map(role -> mapper.map(role, RoleWIthOperationDTO.class))
+                .toList();
     }
 
     @Override

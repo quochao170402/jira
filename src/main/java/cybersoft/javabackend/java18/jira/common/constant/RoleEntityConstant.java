@@ -1,9 +1,10 @@
-package cybersoft.javabackend.java18.jira.role.model;
+package cybersoft.javabackend.java18.jira.common.constant;
 
 import lombok.experimental.UtilityClass;
 
 @UtilityClass
-public class RoleEntity {
+public class RoleEntityConstant {
+    @UtilityClass
     public static class Role{
         public static final String TABLE_NAME = "J_ROLE";
         public static final String NAME = "J_NAME";
@@ -40,6 +41,7 @@ public class RoleEntity {
 
     }
 
+    @UtilityClass
     public static class RoleMappedOperation {
         public static final String OPERATION_MAPPED_ROLE = "operations";
         public static final String JOIN_TABLE = "G_ROLE_OPERATION";

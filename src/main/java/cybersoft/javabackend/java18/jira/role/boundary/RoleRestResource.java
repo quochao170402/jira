@@ -1,11 +1,11 @@
 package cybersoft.javabackend.java18.jira.role.boundary;
 
+import cybersoft.javabackend.java18.jira.common.constant.UrlConstant;
 import cybersoft.javabackend.java18.jira.common.utils.ResponseUtils;
 import cybersoft.javabackend.java18.jira.role.dto.RoleDTO;
 import cybersoft.javabackend.java18.jira.role.service.RoleService;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -14,7 +14,7 @@ import java.util.UUID;
 
 
 @RestController
-@RequestMapping("/api/roles")
+@RequestMapping(UrlConstant.ROLE_URL)
 public class RoleRestResource {
     private final RoleService service;
 
@@ -25,6 +25,14 @@ public class RoleRestResource {
     @GetMapping
     public Object findAll(){
         return ResponseUtils.get(service.findAllDto(RoleDTO.class), HttpStatus.OK);
+    }
+
+    @GetMapping("/include-operation")
+    public Object findAllIncludeOperation(){
+        return ResponseUtils.get(
+                service.findAllIncludeOperation(),
+                HttpStatus.OK
+        );
     }
 
     @GetMapping("/paging")
@@ -43,7 +51,7 @@ public class RoleRestResource {
 
 
     @PostMapping("{role-id}/add-operations")
-    public ResponseEntity<?> addOperations(@RequestBody List<UUID> ids,
+    public Object addOperations(@RequestBody List<UUID> ids,
                                            @PathVariable("role-id") UUID roleId) {
         return ResponseUtils.get(service.addOperations(ids, roleId),
                 HttpStatus.OK);

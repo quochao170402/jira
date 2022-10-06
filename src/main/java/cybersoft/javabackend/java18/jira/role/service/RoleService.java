@@ -9,9 +9,7 @@ import java.util.List;
 import java.util.UUID;
 
 public interface RoleService extends GenericService<Role, RoleDTO, UUID> {
-    Role update(Role role, String code);
-    void deleteByCode(String code);
     RoleDTO save(RoleDTO dto);
     RoleWIthOperationDTO addOperations(List<UUID> ids, UUID roleId);
-
+    List<RoleWIthOperationDTO> findAllIncludeOperation();
 }

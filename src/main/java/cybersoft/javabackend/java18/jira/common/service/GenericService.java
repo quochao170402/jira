@@ -7,7 +7,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
 public interface GenericService<T extends BaseEntity, D, I> {
     JpaRepository<T, I> getRepository(); // Factory Method
@@ -20,23 +19,24 @@ public interface GenericService<T extends BaseEntity, D, I> {
 
     default List<T> findAll(Pageable page) {
         return getRepository().findAll(page)
-                .stream().toList();
+                .stream()
+                .toList();
     }
 
-    default List<T> findAllByIds(List<I> ids){
+    default List<T> findAllByIds(List<I> ids) {
         return getRepository().findAllById(ids);
     }
 
     default List<D> findAllDto(Class<D> clazz) {
         return getRepository().findAll().stream()
                 .map(model -> getMapper().map(model, clazz))
-                .collect(Collectors.toList());
+                .toList();
     }
 
     default List<D> findAllDto(Pageable page, Class<D> clazz) {
         return getRepository().findAll(page).stream()
                 .map(model -> getMapper().map(model, clazz))
-                .collect(Collectors.toList());
+                .toList();
     }
 
     default Optional<T> findById(I id) {
@@ -58,5 +58,9 @@ public interface GenericService<T extends BaseEntity, D, I> {
 
     default T update(T entity) {
         return getRepository().save(entity);
+    }
+
+    default Optional<D> findDtoById(I id, Class<D> dClass) {
+        return Optional.of(getMapper().map(getRepository().findById(id), dClass));
     }
 }
