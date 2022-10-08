@@ -51,7 +51,7 @@ public class SecurityConfig {
         http.antMatcher("/api/v1/**").authorizeRequests()
                 .antMatchers("/api/v1/roles")
                     .authenticated()
-                .antMatchers("/api/v1/auth/login")
+                .antMatchers("/login")
                     .permitAll()
                 .anyRequest().permitAll();
 

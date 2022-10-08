@@ -12,6 +12,6 @@ import java.util.UUID;
 public interface RoleRepository extends JpaRepository<Role, UUID> {
     Role findTop1ByNameOrCode(String name, String code);
 
-    @Query("select r from Role as r left join fetch r.operations")
+    @Query("select distinct r from Role as r left join fetch r.operations")
     List<Role> findAllIncludeOperation();
 }

@@ -25,15 +25,16 @@ public class UserGroupRestSource {
     public Object findAll() {
         return ResponseUtils.get(
                 service.findAllDto(UserGroupDTO.class),
-                HttpStatus.OK);
+                HttpStatus.OK
+        );
     }
 
     @GetMapping("/include-users")
     public Object findAllUserGroupIncludeUsers() {
         return ResponseUtils.get(
-//                service.findDtoById(groupId, UserGroupWithUsersDTO.class),
                 service.findAllUserGroupIncludeUser(),
-                HttpStatus.OK);
+                HttpStatus.OK
+        );
     }
 
     @PostMapping
@@ -43,7 +44,7 @@ public class UserGroupRestSource {
     }
 
     @PostMapping("/{group-id}/add-users")
-    public Object addUsersToGroup(@PathVariable(name = "group-id") UUID groupId,@RequestBody List<UUID> ids) {
+    public Object addUsersToGroup(@PathVariable(name = "group-id") UUID groupId, @RequestBody List<UUID> ids) {
         return ResponseUtils.get(
                 service.addUserToGroup(groupId, ids),
                 HttpStatus.CREATED

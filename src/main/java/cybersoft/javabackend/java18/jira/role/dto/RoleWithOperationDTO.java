@@ -11,10 +11,10 @@ import java.util.UUID;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class RoleWIthOperationDTO {
+public class RoleWithOperationDTO {
     private UUID id;
     private String name;
     private String code;
     private String description;
-    private Set<OperationDTO> operationDTOs = new LinkedHashSet<>();
+    private Set<OperationDTO> operations = new LinkedHashSet<>();
 }

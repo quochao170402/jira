@@ -24,11 +24,11 @@ import java.util.Set;
 public class Role extends BaseEntity {
 
     @Column(name = RoleEntityConstant.Role.NAME, unique = true)
-    @Length(min = 5, max = 100, message = "Role name must have length between {min} and {max}")
+    @Length(min = 5, max = 100, message = "{role.name.size}")
     private String name;
 
     @Column(name = RoleEntityConstant.Role.CODE, unique = true)
-    @Length(min = 3, max = 10, message = "Role name must have length between {min} and {max}")
+    @Length(min = 3, max = 10, message = "{role.code.size}")
     private String code;
 
     @Column(name = RoleEntityConstant.Role.DESCRIPTION)

@@ -1,6 +1,7 @@
 package cybersoft.javabackend.java18.jira.user.dto;
 
 import cybersoft.javabackend.java18.jira.user.model.User;
+import cybersoft.javabackend.java18.jira.user.validation.annotation.UniqueUser;
 import lombok.*;
 
 import java.util.UUID;
@@ -10,6 +11,7 @@ import java.util.UUID;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
+@UniqueUser
 public class UserDTO {
     private UUID id;
     private String username;

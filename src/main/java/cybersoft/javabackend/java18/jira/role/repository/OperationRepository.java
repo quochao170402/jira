@@ -8,5 +8,6 @@ import java.util.UUID;
 
 @Repository
 public interface OperationRepository extends JpaRepository<Operation, UUID> {
+    Operation findTop1ByNameOrCode(String name, String code);
 
 }

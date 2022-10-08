@@ -30,3 +30,6 @@ public class Module extends BaseEntity {
     @Column(name = RoleEntityConstant.Module.DESCRIPTION)
     private String description;
 }
+
+
+

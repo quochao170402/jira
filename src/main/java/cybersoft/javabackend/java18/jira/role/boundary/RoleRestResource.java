@@ -53,7 +53,9 @@ public class RoleRestResource {
     @PostMapping("{role-id}/add-operations")
     public Object addOperations(@RequestBody List<UUID> ids,
                                            @PathVariable("role-id") UUID roleId) {
-        return ResponseUtils.get(service.addOperations(ids, roleId),
-                HttpStatus.OK);
+        return ResponseUtils.get(
+                service.addOperations(ids, roleId),
+                HttpStatus.OK
+        );
     }
 }

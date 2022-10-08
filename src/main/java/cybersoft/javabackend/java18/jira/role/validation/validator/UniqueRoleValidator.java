@@ -23,9 +23,7 @@ public class UniqueRoleValidator implements ConstraintValidator<UniqueRole, Role
 
     @Override
     public boolean isValid(RoleDTO roleDTO, ConstraintValidatorContext context) {
-        System.out.println("da chay vo day");
         Role existedRole = roleRepository.findTop1ByNameOrCode(roleDTO.getName(), roleDTO.getCode());
-        System.out.println(existedRole == null);
         if (existedRole==null) return true;
 
         context.buildConstraintViolationWithTemplate(message)

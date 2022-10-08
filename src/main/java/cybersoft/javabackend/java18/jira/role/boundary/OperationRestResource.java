@@ -21,14 +21,18 @@ public class OperationRestResource {
 
     @GetMapping
     public Object findAll() {
-        return ResponseUtils.get(operationService.findAllDto(OperationDTO.class),
-                HttpStatus.OK);
+        return ResponseUtils.get(
+                operationService.findAllDto(OperationDTO.class),
+                HttpStatus.OK
+        );
     }
 
     @PostMapping
     public Object save(@RequestBody @Valid OperationDTO dto) {
-        return ResponseUtils.get(operationService.save(dto, Operation.class, OperationDTO.class),
-                HttpStatus.OK);
+        return ResponseUtils.get(
+                operationService.save(dto, Operation.class, OperationDTO.class),
+                HttpStatus.OK
+        );
     }
 
 }

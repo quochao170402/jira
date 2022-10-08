@@ -1,5 +1,6 @@
-package cybersoft.javabackend.java18.jira.security.validation;
+package cybersoft.javabackend.java18.jira.security.validation.validator;
 
+import cybersoft.javabackend.java18.jira.security.validation.annotation.MustBeExistedUser;
 import cybersoft.javabackend.java18.jira.user.model.User;
 import cybersoft.javabackend.java18.jira.user.repository.UserRepository;
 

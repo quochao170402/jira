@@ -10,11 +10,14 @@ import java.util.UUID;
 
 @Repository
 public interface UserGroupRepository extends JpaRepository<UserGroup, UUID> {
+
+    UserGroup findTop1ByNameOrCode(String name, String code);
+
     /*
         Solutions for n+1 problem:
         Solution 1: Adding left join to query statement.
         Solution 2: Adding fetch to query statement.
      */
-    @Query("select ug from UserGroup as ug left join fetch ug.users")
+    @Query("select distinct ug from UserGroup as ug left join fetch ug.users")
     List<UserGroup> findAllIncludeUsers();
 }

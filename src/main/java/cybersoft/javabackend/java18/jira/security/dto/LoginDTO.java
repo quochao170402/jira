@@ -1,6 +1,6 @@
 package cybersoft.javabackend.java18.jira.security.dto;
 
-import cybersoft.javabackend.java18.jira.security.validation.MustBeExistedUser;
+import cybersoft.javabackend.java18.jira.security.validation.annotation.MustBeExistedUser;
 import lombok.*;
 
 @Getter
