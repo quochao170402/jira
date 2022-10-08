@@ -1,6 +1,7 @@
 package cybersoft.javabackend.java18.jira.common.utils;
 
 import cybersoft.javabackend.java18.jira.common.dto.ResponseDTO;
+import cybersoft.javabackend.java18.jira.common.exception.JiraBusinessException;
 import lombok.experimental.UtilityClass;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -49,6 +50,18 @@ public class ResponseUtils {
     }
 
     public static ResponseEntity<ResponseDTO> getErrors(MethodArgumentNotValidException exception, HttpStatus status) {
+        return new ResponseEntity<>(
+                ResponseDTO.builder()
+                        .content(null)
+                        .hasErrors(true)
+                        .errors(ExceptionUtils.getErrors(exception))
+                        .timestamp(DateTimeUtils.now())
+                        .status(status.value())
+                        .build(),
+                status);
+    }
+
+    public static ResponseEntity<ResponseDTO> getErrors(JiraBusinessException exception, HttpStatus status) {
         return new ResponseEntity<>(
                 ResponseDTO.builder()
                         .content(null)

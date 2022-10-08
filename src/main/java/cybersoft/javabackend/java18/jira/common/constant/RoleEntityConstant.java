@@ -44,9 +44,9 @@ public class RoleEntityConstant {
     @UtilityClass
     public static class RoleMappedOperation {
         public static final String OPERATION_MAPPED_ROLE = "operations";
-        public static final String JOIN_TABLE = "G_ROLE_OPERATION";
-        public static final String JOIN_TABLE_ROLE_ID = "G_ROLE_ID";
-        public static final String JOIN_TABLE_OPERATION_ID = "G_OPERATION_ID";
+        public static final String JOIN_TABLE = "J_ROLE_OPERATION";
+        public static final String JOIN_TABLE_ROLE_ID = "J_ROLE_ID";
+        public static final String JOIN_TABLE_OPERATION_ID = "J_OPERATION_ID";
 
     }
 }

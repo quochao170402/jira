@@ -7,5 +7,5 @@ import cybersoft.javabackend.java18.jira.user.model.User;
 import java.util.UUID;
 
 public interface UserService extends GenericService<User, UserDTO, UUID> {
-
+    UserDTO createUser(UserDTO userDTO);
 }

@@ -2,10 +2,10 @@ server:
   port: 8088
 
 spring:
-#  security:
-#    user:
-#      name: admin
-#      password: 1234
+  security:
+    user:
+      name: admin
+      password: 1234
   datasource:
     url: jdbc:postgresql://localhost:5432/postgres
     username: postgres

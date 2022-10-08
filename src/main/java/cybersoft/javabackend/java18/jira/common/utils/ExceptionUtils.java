@@ -25,4 +25,8 @@ public class ExceptionUtils {
                 .map(DefaultMessageSourceResolvable::getDefaultMessage)
                 .toList();
     }
+
+    public static List<String> getErrors(RuntimeException exception) {
+        return List.of(exception.getMessage());
+    }
 }

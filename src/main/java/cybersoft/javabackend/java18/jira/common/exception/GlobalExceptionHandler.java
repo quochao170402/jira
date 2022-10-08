@@ -34,4 +34,13 @@ public class GlobalExceptionHandler {
     ) {
         return ResponseUtils.getErrors(exception,HttpStatus.BAD_REQUEST);
     }
+
+    @ExceptionHandler(JiraBusinessException.class)
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    public ResponseEntity<ResponseDTO> handleGlobalException(
+            JiraBusinessException exception
+    ) {
+        return ResponseUtils.getErrors(exception,HttpStatus.BAD_REQUEST);
+    }
+
 }
